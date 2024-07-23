@@ -1,0 +1,222 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #1a1a1a;
+    color: white;
+    overflow: hidden;
+}
+
+.magic-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    transition: background-color 0.5s ease;
+    overflow: hidden;
+    perspective: 1000px;
+}
+
+.magic-bg {
+    background: radial-gradient(circle, #2c3e50 0%, #34495e 100%);
+}
+
+.magic-button {
+    padding: 20px 40px;
+    font-size: 1.5em;
+    color: #ffffff;
+    background-color: #2c3e50;
+    border: 2px solid #34495e;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    position: relative;
+    z-index: 10;
+    overflow: hidden;
+}
+
+.magic-button.clicked {
+    background-color: #34495e;
+    transform: scale(1.1);
+}
+
+.magic-button::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 180deg at 50% 50%, #1a1a1a, #2c3e50, #34495e, #1a1a1a);
+    transition: opacity 0.6s ease;
+    opacity: 0;
+    z-index: -1;
+}
+
+.magic-button.clicked::before {
+    animation: rotate 2s linear infinite;
+    opacity: 1;
+}
+
+.magic-button:hover {
+    transform: scale(1.2) rotateY(10deg) rotateX(10deg);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.magic-effect {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(44, 62, 80, 0.6) 0%, rgba(34, 47, 62, 0) 70%);
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.5s ease;
+    opacity: 0.6;
+}
+
+.magic-effect.show {
+    transform: scale(4);
+}
+
+.magic-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: #2c3e50;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    z-index: 20;
+    transition: transform 0.5s ease;
+    animation: expand 0.5s ease forwards;
+}
+
+.magic-modal:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.magic-modal p {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.magic-modal button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: white;
+    background-color: #34495e;
+    border: 2px solid #2c3e50;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.magic-modal button:hover {
+    background-color: #2c3e50;
+}
+
+.floating-cubes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.cube {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    transform-style: preserve-3d;
+    animation: rotate-cube 10s infinite linear;
+}
+
+.cube .face {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cube1 {
+    top: 20%;
+    left: 10%;
+    animation-duration: 12s;
+}
+
+.cube2 {
+    top: 50%;
+    left: 50%;
+    animation-duration: 14s;
+}
+
+.cube3 {
+    top: 80%;
+    left: 80%;
+    animation-duration: 16s;
+}
+
+.face.front {
+    transform: translateZ(25px);
+}
+
+.face.back {
+    transform: rotateY(180deg) translateZ(25px);
+}
+
+.face.left {
+    transform: rotateY(-90deg) translateZ(25px);
+}
+
+.face.right {
+    transform: rotateY(90deg) translateZ(25px);
+}
+
+.face.top {
+    transform: rotateX(90deg) translateZ(25px);
+}
+
+.face.bottom {
+    transform: rotateX(-90deg) translateZ(25px);
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotate-cube {
+    0% {
+        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    }
+
+    100% {
+        transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    }
+}
+
+@keyframes expand {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
